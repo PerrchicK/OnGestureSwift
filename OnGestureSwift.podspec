@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "OnGestureSwift"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "OnGestureSwift lets you call onClick / onLongPress / onPan / onSwipe / onDrag from any UIView object."
 
   # This description is used to generate tags and improve search results.
@@ -51,7 +51,7 @@ s.description  = "Simply call the extension methods: onClick / onLongPress / onP
   #
 
   s.author             = { "Perry Sh" => "perrchick@gmail.com" }
-  s.social_media_url   = "https://www.linkedin.com/in/perrysh"
+#s.social_media_url   = "https://www.linkedin.com/in/perrysh"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -88,7 +88,7 @@ s.description  = "Simply call the extension methods: onClick / onLongPress / onP
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files = "OnGestureSwift/**/*.{swift}"
+  s.source_files = "OnGesture/**/*.{swift}"
 # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

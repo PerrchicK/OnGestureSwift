@@ -39,7 +39,7 @@
 		AC6845EB209ECCB80082CF62 /* OnGestureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGestureTests.swift; sourceTree = "<group>"; };
 		AC6845ED209ECCB80082CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnGestureExtensions.swift; sourceTree = "<group>"; };
-		AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OnGestureSwift.podspec; sourceTree = "<group>"; };
+		AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OnGestureSwift.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FAB54CD3D9649E72BE4D9513 /* Pods-OnGestureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnGestureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnGestureTests/Pods-OnGestureTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
