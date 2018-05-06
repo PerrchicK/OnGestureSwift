@@ -13,7 +13,7 @@
 		AC6845EC209ECCB80082CF62 /* OnGestureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6845EB209ECCB80082CF62 /* OnGestureTests.swift */; };
 		AC6845EE209ECCB80082CF62 /* OnGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = AC6845E0209ECCB80082CF62 /* OnGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC6845F8209ECCF80082CF62 /* OnGestureExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */; };
-		AC6845FC209ECEF10082CF62 /* OnGestureSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AC6845FB209ECEF10082CF62 /* OnGestureSwift.podspec */; };
+		AC684624209ED53A0082CF62 /* OnGestureSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		AC6845EB209ECCB80082CF62 /* OnGestureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGestureTests.swift; sourceTree = "<group>"; };
 		AC6845ED209ECCB80082CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnGestureExtensions.swift; sourceTree = "<group>"; };
-		AC6845FB209ECEF10082CF62 /* OnGestureSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OnGestureSwift.podspec; sourceTree = "<group>"; };
+		AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OnGestureSwift.podspec; sourceTree = "<group>"; };
 		FAB54CD3D9649E72BE4D9513 /* Pods-OnGestureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnGestureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnGestureTests/Pods-OnGestureTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +76,7 @@
 		AC6845D3209ECCB80082CF62 = {
 			isa = PBXGroup;
 			children = (
+				AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */,
 				AC6845DF209ECCB80082CF62 /* OnGesture */,
 				AC6845EA209ECCB80082CF62 /* OnGestureTests */,
 				AC6845DE209ECCB80082CF62 /* Products */,
@@ -96,7 +97,6 @@
 		AC6845DF209ECCB80082CF62 /* OnGesture */ = {
 			isa = PBXGroup;
 			children = (
-				AC6845FB209ECEF10082CF62 /* OnGestureSwift.podspec */,
 				AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */,
 				AC6845E0209ECCB80082CF62 /* OnGesture.h */,
 				AC6845E1209ECCB80082CF62 /* Info.plist */,
@@ -220,7 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC6845FC209ECEF10082CF62 /* OnGestureSwift.podspec in Resources */,
+				AC684624209ED53A0082CF62 /* OnGestureSwift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

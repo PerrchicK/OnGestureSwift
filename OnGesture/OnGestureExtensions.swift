@@ -22,7 +22,7 @@ public typealias PredicateClosure<T> = ((T) -> Bool)
 /// - parameter right:  The value represents `to`.
 ///
 /// - returns: A random number between `left` and `right`.
-func - (left: CGPoint, right: CGPoint) -> CGPoint { // Reference: http://nshipster.com/swift-operators/
+public func - (left: CGPoint, right: CGPoint) -> CGPoint { // Reference: http://nshipster.com/swift-operators/
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 
@@ -34,7 +34,7 @@ extension UIView {
      - parameter onClickClosure: A closure to dispatch when a tap gesture is recognized.
      */
     @discardableResult
-    func onClick(_ onClickClosure: @escaping OnTapRecognizedClosure) -> OnClickListener {
+    public func onClick(_ onClickClosure: @escaping OnTapRecognizedClosure) -> OnClickListener {
         self.isUserInteractionEnabled = true
         let tapGestureRecognizer = OnClickListener(target: self, action: #selector(onTapRecognized(_:)), closure: onClickClosure)
         
@@ -70,7 +70,7 @@ extension UIView {
      - parameter predicateClosure: A closure that determmines whether to call the even or not.
      */
     @discardableResult
-    func onDrag(predicateClosure: PredicateClosure<UIView>? = nil, onDragClosure: @escaping CallbackClosure<OnPanListener>) -> OnPanListener {
+    public func onDrag(predicateClosure: PredicateClosure<UIView>? = nil, onDragClosure: @escaping CallbackClosure<OnPanListener>) -> OnPanListener {
         return onPan { panGestureRecognizer in
             guard let draggedView = panGestureRecognizer.view, (predicateClosure?(self) ?? true), let onPanListener = panGestureRecognizer as? OnPanListener else { return }
             
@@ -88,7 +88,7 @@ extension UIView {
      - parameter onPanClosure: A closure to dispatch when the gesture is recognized.
      */
     @discardableResult
-    func onPan(_ onPanClosure: @escaping OnPanRecognizedClosure) -> OnPanListener {
+    public func onPan(_ onPanClosure: @escaping OnPanRecognizedClosure) -> OnPanListener {
         self.isUserInteractionEnabled = true
         let panGestureRecognizer = OnPanListener(target: self, action: #selector(onPanRecognized(_:)), closure: onPanClosure)
         
@@ -110,7 +110,7 @@ extension UIView {
         case .cancelled: fallthrough
         case .ended:
             onPanListener.startPoint = nil
-            onPanListener.pannedPoint = nil
+            onPanListener._pannedPoint = nil
             onPanListener.offsetPoint = nil
             onPanListener.relativeStartPoint = nil
         case .began:
@@ -119,7 +119,7 @@ extension UIView {
             fallthrough
         default:
             if let startPoint = onPanListener.startPoint {
-                onPanListener.pannedPoint = CGPoint(x: locationOfTouch.x + (startPoint.x), y: locationOfTouch.y + (startPoint.y))
+                onPanListener._pannedPoint = CGPoint(x: locationOfTouch.x + (startPoint.x), y: locationOfTouch.y + (startPoint.y))
                 onPanListener.offsetPoint = locationOfTouch - startPoint
             }
             
@@ -138,7 +138,7 @@ extension UIView {
      - parameter direction: The direction to detect
      */
     @discardableResult
-    func onSwipe(direction: UISwipeGestureRecognizerDirection, _ onSwipeClosure: @escaping OnSwipeRecognizedClosure) -> OnSwipeListener {
+    public func onSwipe(direction: UISwipeGestureRecognizerDirection, _ onSwipeClosure: @escaping OnSwipeRecognizedClosure) -> OnSwipeListener {
         self.isUserInteractionEnabled = true
         let swipeGestureRecognizer = OnSwipeListener(target: self, action: #selector(onSwipeRecognized(_:)), closure: onSwipeClosure)
         
@@ -163,7 +163,7 @@ extension UIView {
      - parameter onLongPressClosure: A closure to dispatch when a long press gesture is recognized.
      */
     @discardableResult
-    func onLongPress(_ onLongPressClosure: @escaping OnLongPressRecognizedClosure) -> OnLongPressListener {
+    public func onLongPress(_ onLongPressClosure: @escaping OnLongPressRecognizedClosure) -> OnLongPressListener {
         self.isUserInteractionEnabled = true
         let longPressGestureRecognizer = OnLongPressListener(target: self, action: #selector(longPressRecognized(_:)), closure: onLongPressClosure)
         
@@ -182,8 +182,8 @@ extension UIView {
 
 }
 
-typealias OnTapRecognizedClosure = (_ tapGestureRecognizer: UITapGestureRecognizer) -> ()
-class OnClickListener: UITapGestureRecognizer, UIGestureRecognizerDelegate {
+public typealias OnTapRecognizedClosure = (_ tapGestureRecognizer: UITapGestureRecognizer) -> ()
+public class OnClickListener: UITapGestureRecognizer, UIGestureRecognizerDelegate {
     private(set) var closure: OnTapRecognizedClosure
 
     init(target: Any?, action: Selector?, closure: @escaping OnTapRecognizedClosure) {
@@ -191,14 +191,14 @@ class OnClickListener: UITapGestureRecognizer, UIGestureRecognizerDelegate {
         super.init(target: target, action: action)
     }
     
-    @objc func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 
 }
 
-typealias OnLongPressRecognizedClosure = (_ longPressGestureRecognizer: UILongPressGestureRecognizer) -> ()
-class OnLongPressListener: UILongPressGestureRecognizer, UIGestureRecognizerDelegate {
+public typealias OnLongPressRecognizedClosure = (_ longPressGestureRecognizer: UILongPressGestureRecognizer) -> ()
+public class OnLongPressListener: UILongPressGestureRecognizer, UIGestureRecognizerDelegate {
     private(set) var closure: OnLongPressRecognizedClosure
 
     init(target: Any?, action: Selector?, closure: @escaping OnLongPressRecognizedClosure) {
@@ -206,25 +206,28 @@ class OnLongPressListener: UILongPressGestureRecognizer, UIGestureRecognizerDele
         super.init(target: target, action: action)
     }
 
-    @objc func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 }
 
-typealias OnPanRecognizedClosure = (_ panGestureRecognizer: UIPanGestureRecognizer) -> ()
-class OnPanListener: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
+public typealias OnPanRecognizedClosure = (_ panGestureRecognizer: UIPanGestureRecognizer) -> ()
+public class OnPanListener: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
     private(set) var closure: OnPanRecognizedClosure
     var startPoint: CGPoint?
     var relativeStartPoint: CGPoint?
     var offsetPoint: CGPoint?
-    var pannedPoint: CGPoint?
+    var _pannedPoint: CGPoint?
+    public var pannedPoint: CGPoint? {
+        return _pannedPoint
+    }
     
     init(target: Any?, action: Selector?, closure: @escaping OnPanRecognizedClosure) {
         self.closure = closure
         super.init(target: target, action: action)
     }
     
-    @objc func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
     
@@ -233,8 +236,8 @@ class OnPanListener: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
     //    }
 }
 
-typealias OnSwipeRecognizedClosure = (_ swipeGestureRecognizer: UISwipeGestureRecognizer) -> ()
-class OnSwipeListener: UISwipeGestureRecognizer, UIGestureRecognizerDelegate {
+public typealias OnSwipeRecognizedClosure = (_ swipeGestureRecognizer: UISwipeGestureRecognizer) -> ()
+public class OnSwipeListener: UISwipeGestureRecognizer, UIGestureRecognizerDelegate {
     private(set) var closure: OnSwipeRecognizedClosure
     
     init(target: Any?, action: Selector?, closure: @escaping OnSwipeRecognizedClosure) {
@@ -242,7 +245,7 @@ class OnSwipeListener: UISwipeGestureRecognizer, UIGestureRecognizerDelegate {
         super.init(target: target, action: action)
     }
     
-    @objc func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 }
