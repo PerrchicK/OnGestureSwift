@@ -1,5 +1,7 @@
 # OnGestureSwift [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+(use it and modify it freely, just don't forget to thank me)
+
 This project supplies Swift extensions that will allow developers to use an ```onGesture``` method, such as: ```onClick```, ```onLongPress```, ```onSwipe```, ```onPan``` or **even** ```onDrag``` that wil allow dragging of the view.
 
 It's very similar to the Android SDK's ```setOnClickListener(...)``` method.
@@ -46,3 +48,5 @@ Don't worry about memory leaks, this implementations has been tested and it work
 Just be sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references (you usually would like not to hold a strong reference inside a closure).
 
 Enjoy :)
+
+[Perry](http://linkedin.com/in/perrysh)
