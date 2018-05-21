@@ -12,6 +12,10 @@ It's very similar to the Android SDK's ```setOnClickListener(...)``` method.
 #### onClick (a simple tap) usage
 
 ```swift
+import OnGestureSwift
+
+...
+
 someView.onClick() { (tapGestureRecognizer: UITapGestureRecognizer) in
     // Do something...
 }
@@ -20,6 +24,10 @@ someView.onClick() { (tapGestureRecognizer: UITapGestureRecognizer) in
 #### onLongPress usage
 
 ```swift
+import OnGestureSwift
+
+...
+
 mapView.onLongPress({ [weak self] (longPressGestureRecognizer) in
     guard longPressGestureRecognizer.state == .began, let mapView = self?.mapView else { return }
 
@@ -33,6 +41,10 @@ mapView.onLongPress({ [weak self] (longPressGestureRecognizer) in
 #### onSwipe usage
 
 ```swift
+import OnGestureSwift
+
+...
+
 override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -47,7 +59,7 @@ override func viewDidLoad() {
 Simply use: ```pod 'OnGestureSwift'```
 
 ## Important Notes
-Don't worry about memory leaks, this implementations has been tested and it works perfectly with ARC.
+Don't worry about memory leaks, this implementations has been tested, reviewed and improved - **it works perfectly with ARC**.
 Just be sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references (you usually would like not to hold a strong reference inside a closure).
 
 Enjoy :)
