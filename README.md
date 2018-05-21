@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 (use it and modify it freely, just don't forget to thank me)
 
-This project supplies Swift extensions that will allow developers to use an ```onGesture``` method, such as: ```onClick```, ```onLongPress```, ```onSwipe```, ```onPan``` or **even** ```onDrag``` that wil allow dragging of the view.
+This project supplies Swift extensions that let developers use an ```onGesture``` method, such as: ```onClick```, ```onLongPress```, ```onSwipe```, ```onPan``` (and **even** ```onDrag``` that will allow dragging the view).
 
 It's very similar to the Android SDK's ```setOnClickListener(...)``` method.
 
@@ -59,8 +59,9 @@ override func viewDidLoad() {
 Simply use: ```pod 'OnGestureSwift'```
 
 ## Important Notes
+### Memory Management
 Don't worry about memory leaks, this implementations has been tested, reviewed and improved - **it works perfectly with ARC**.
-Just be sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references (you usually would like not to hold a strong reference inside a closure).
+Just make sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references to ```self``` (you usually would like **not** to hold a strong reference inside a closure).
 
 Enjoy :)
 
