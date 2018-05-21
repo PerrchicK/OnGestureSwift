@@ -5,7 +5,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 (use it and modify it freely, just don't forget to thank me)
 
-This project supplies Swift extensions that let developers use an ```onGesture``` method, such as: ```onClick```, ```onLongPress```, ```onSwipe```, ```onPan``` (and **even** ```onDrag``` that will allow dragging the view).
+The Android SDK allows developers take any ```View``` object and set an ```OnClickListener``` object to it, now you can also do it in Swift!
+Take any ```UIView``` object and set a "listener" with an action inside a closure by using this CocoaPod project.
+
+This project supplies lightweight Swift extensions that let developers use an ```onGesture``` method, such as: ```onClick```, ```onLongPress```, ```onSwipe```, ```onPan``` (and **even** ```onDrag``` that will allow dragging the view).
 
 It's very similar to the Android SDK's ```setOnClickListener(...)``` method.
 
