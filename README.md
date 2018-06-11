@@ -63,7 +63,7 @@ Simply use: ```pod 'OnGestureSwift'```
 
 ## Important Notes
 ### Memory Management
-Don't worry about memory leaks, this implementations has been tested, reviewed and improved - **it works perfectly with ARC**.
+Don't worry about memory leaks, this implementation has been tested, reviewed, used and improved - **it works perfectly with ARC**, so keep calm and free your mind.
 Just make sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references to ```self``` (you usually would like **not** to hold a strong reference inside a closure).
 
 Enjoy :)
