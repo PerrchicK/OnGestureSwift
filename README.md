@@ -51,15 +51,48 @@ import OnGestureSwift
 override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.onSwipe(direction: .down) { [weak self] _ in
-        self?.dismiss(animated: true, completion: nil)
+    view.onSwipe(direction: .down) { [unowned self] _ in
+        self.dismiss(animated: true, completion: nil)
     }
     ...
 }
 ```
 
+#### onPan usage
+
+```swift
+import OnGestureSwift
+
+...
+
+someButton.onPan { [weak self] (panGestureRecognizer) in
+    guard let strongSelf = self else { return }
+
+    if let superview = panGestureRecognizer.view?.superview {
+        let locationOfPan = panGestureRecognizer.location(in: superview)
+        // Do something with 'locationOfPan'
+    }
+}
+```
+
+#### onDrag usage
+
+```swift
+import OnGestureSwift
+
+...
+
+someLabel.onDrag(predicateClosure: { _ in
+    return true
+}, onDragClosure: { dragGestureListener in
+    guard let draggingPoint = dragGestureListener.pannedPoint else { return }
+
+    // Do something with 'draggingPoint'
+})
+```
+
 ### CocoaPods
-Simply use: ```pod 'OnGestureSwift'```
+To install this pod simply use: ```pod 'OnGestureSwift'```
 
 ## Important Notes
 ### Memory Management
