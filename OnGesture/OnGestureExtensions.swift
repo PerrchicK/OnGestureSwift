@@ -15,13 +15,6 @@ public typealias PredicateClosure<T> = ((T) -> Bool)
 
 // MARK: - Global Methods
 
-/// Inclusively raffles a number from `left` hand operand value to the `right` hand operand value.
-///
-/// For example: the expression `{ let random: Int =  -3 ~ 5 }` will declare a random number between -3 and 5.
-/// - parameter left:   The value represents `from`.
-/// - parameter right:  The value represents `to`.
-///
-/// - returns: A random number between `left` and `right`.
 public func - (left: CGPoint, right: CGPoint) -> CGPoint { // Reference: http://nshipster.com/swift-operators/
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
