@@ -14,6 +14,7 @@
 		AC6845EE209ECCB80082CF62 /* OnGesture.h in Headers */ = {isa = PBXBuildFile; fileRef = AC6845E0209ECCB80082CF62 /* OnGesture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC6845F8209ECCF80082CF62 /* OnGestureExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */; };
 		AC684624209ED53A0082CF62 /* OnGestureSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */; };
+		ACC1F20C218D9F9700AD99CC /* OnGestureClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC1F20B218D9F9700AD99CC /* OnGestureClasses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		AC6845ED209ECCB80082CF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnGestureExtensions.swift; sourceTree = "<group>"; };
 		AC684623209ED53A0082CF62 /* OnGestureSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OnGestureSwift.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		ACC1F20B218D9F9700AD99CC /* OnGestureClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGestureClasses.swift; sourceTree = "<group>"; };
 		FAB54CD3D9649E72BE4D9513 /* Pods-OnGestureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnGestureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnGestureTests/Pods-OnGestureTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 				AC6845F7209ECCF80082CF62 /* OnGestureExtensions.swift */,
 				AC6845E0209ECCB80082CF62 /* OnGesture.h */,
 				AC6845E1209ECCB80082CF62 /* Info.plist */,
+				ACC1F20B218D9F9700AD99CC /* OnGestureClasses.swift */,
 			);
 			path = OnGesture;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6845F8209ECCF80082CF62 /* OnGestureExtensions.swift in Sources */,
+				ACC1F20C218D9F9700AD99CC /* OnGestureClasses.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

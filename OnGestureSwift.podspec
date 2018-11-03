@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "OnGestureSwift"
-  s.version      = "0.2.0"
+  s.version      = "0.3.0"
   s.summary      = "OnGestureSwift lets you call onClick / onLongPress / onPan / onSwipe / onDrag from any UIView object."
 
   # This description is used to generate tags and improve search results.

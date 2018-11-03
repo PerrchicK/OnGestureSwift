@@ -9,10 +9,6 @@
 import UIKit
 import ObjectiveC
 
-// MARK: - "macros"
-public typealias CallbackClosure<T> = ((T) -> Void)
-public typealias PredicateClosure<T> = ((T) -> Bool)
-
 // MARK: - Global Methods
 
 public func - (left: CGPoint, right: CGPoint) -> CGPoint { // Reference: http://nshipster.com/swift-operators/
@@ -27,33 +23,33 @@ extension UIView {
      - parameter onClickClosure: A closure to dispatch when a tap gesture is recognized.
      */
     @discardableResult
-    public func onClick(_ onClickClosure: @escaping OnTapRecognizedClosure) -> OnClickListener {
+    public func onClick(_ onClickClosure: @escaping OnGesture.OnTapRecognizedClosure) -> OnGesture.OnClickListener {
         self.isUserInteractionEnabled = true
-        let tapGestureRecognizer = OnClickListener(target: self, action: #selector(onTapRecognized(_:)), closure: onClickClosure)
+        let onClickListener = OnGesture.OnClickListener(target: self, action: #selector(onTapRecognized(_:)), closure: onClickClosure)
         
-        tapGestureRecognizer.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
-        tapGestureRecognizer.delegate = tapGestureRecognizer
+        onClickListener.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
+        onClickListener.delegate = onClickListener
         
         if self is UIButton {
             (self as? UIButton)?.addTarget(self, action: #selector(onTapRecognized(_:)), for: .touchUpInside)
-            tapGestureRecognizer.isEnabled = false
+            onClickListener.isEnabled = false
         }
         
-        addGestureRecognizer(tapGestureRecognizer)
-        return tapGestureRecognizer
+        addGestureRecognizer(onClickListener)
+        return onClickListener
     }
     
     @objc func onTapRecognized(_ tapGestureRecognizer: UITapGestureRecognizer) {
-        var onClickListener: OnClickListener?
+        var _onClickListener: OnGesture.OnClickListener?
         if self is UIButton {
-            onClickListener = gestureRecognizers?.filter( { $0.isEnabled == false && $0 is OnClickListener } ).first as? OnClickListener
+            _onClickListener = gestureRecognizers?.filter( { $0.isEnabled == false && $0 is OnGesture.OnClickListener } ).first as? OnGesture.OnClickListener
         } else {
-            onClickListener = tapGestureRecognizer as? OnClickListener
+            _onClickListener = tapGestureRecognizer as? OnGesture.OnClickListener
         }
         
-        guard let _onClickListener = onClickListener else { return }
+        guard let onClickListener = _onClickListener else { return }
         
-        _onClickListener.closure(_onClickListener)
+        onClickListener.closure(onClickListener)
     }
     
     /**
@@ -63,9 +59,9 @@ extension UIView {
      - parameter predicateClosure: A closure that determmines whether to call the even or not.
      */
     @discardableResult
-    public func onDrag(predicateClosure: PredicateClosure<UIView>? = nil, onDragClosure: @escaping CallbackClosure<OnPanListener>) -> OnPanListener {
+    public func onDrag(predicateClosure: OnGesture.PredicateClosure<UIView>? = nil, onDragClosure: @escaping OnGesture.CallbackClosure<OnGesture.OnPanListener>) -> OnGesture.OnPanListener {
         return onPan { panGestureRecognizer in
-            guard let draggedView = panGestureRecognizer.view, (predicateClosure?(self) ?? true), let onPanListener = panGestureRecognizer as? OnPanListener else { return }
+            guard let draggedView = panGestureRecognizer.view, (predicateClosure?(self) ?? true), let onPanListener = panGestureRecognizer as? OnGesture.OnPanListener else { return }
             
             if let pannedPoint = onPanListener.pannedPoint {
                 draggedView.center = pannedPoint
@@ -81,19 +77,19 @@ extension UIView {
      - parameter onPanClosure: A closure to dispatch when the gesture is recognized.
      */
     @discardableResult
-    public func onPan(_ onPanClosure: @escaping OnPanRecognizedClosure) -> OnPanListener {
+    public func onPan(_ onPanClosure: @escaping OnGesture.OnPanRecognizedClosure) -> OnGesture.OnPanListener {
         self.isUserInteractionEnabled = true
-        let panGestureRecognizer = OnPanListener(target: self, action: #selector(onPanRecognized(_:)), closure: onPanClosure)
+        let onPanListener = OnGesture.OnPanListener(target: self, action: #selector(onPanRecognized(_:)), closure: onPanClosure)
         
-        panGestureRecognizer.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
-        panGestureRecognizer.delegate = panGestureRecognizer
-        addGestureRecognizer(panGestureRecognizer)
+        onPanListener.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
+        onPanListener.delegate = onPanListener
+        addGestureRecognizer(onPanListener)
         
-        return panGestureRecognizer
+        return onPanListener
     }
 
     @objc func onPanRecognized(_ panGestureRecognizer: UIPanGestureRecognizer) {
-        guard let onPanListener = panGestureRecognizer as? OnPanListener,
+        guard let onPanListener = panGestureRecognizer as? OnGesture.OnPanListener,
             let draggedView = panGestureRecognizer.view,
             let superview = draggedView.superview else { return }
         
@@ -121,7 +117,7 @@ extension UIView {
             }
         }
         
-        onPanListener.closure(panGestureRecognizer)
+        onPanListener.closure(onPanListener)
     }
     
     /**
@@ -131,9 +127,9 @@ extension UIView {
      - parameter direction: The direction to detect
      */
     @discardableResult
-    public func onSwipe(direction: UISwipeGestureRecognizerDirection, _ onSwipeClosure: @escaping OnSwipeRecognizedClosure) -> OnSwipeListener {
+    public func onSwipe(direction: UISwipeGestureRecognizerDirection, _ onSwipeClosure: @escaping OnGesture.OnSwipeRecognizedClosure) -> OnGesture.OnSwipeListener {
         self.isUserInteractionEnabled = true
-        let swipeGestureRecognizer = OnSwipeListener(target: self, action: #selector(onSwipeRecognized(_:)), closure: onSwipeClosure)
+        let swipeGestureRecognizer = OnGesture.OnSwipeListener(target: self, action: #selector(onSwipeRecognized(_:)), closure: onSwipeClosure)
         
         swipeGestureRecognizer.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
         
@@ -145,9 +141,9 @@ extension UIView {
     }
     
     @objc func onSwipeRecognized(_ swipeGestureRecognizer: UISwipeGestureRecognizer) {
-        guard let swipeGestureRecognizer = swipeGestureRecognizer as? OnSwipeListener else { return }
+        guard let onSwipeListener = swipeGestureRecognizer as? OnGesture.OnSwipeListener else { return }
         
-        swipeGestureRecognizer.closure(swipeGestureRecognizer)
+        onSwipeListener.closure(onSwipeListener)
     }
     
     /**
@@ -156,9 +152,9 @@ extension UIView {
      - parameter onLongPressClosure: A closure to dispatch when a long press gesture is recognized.
      */
     @discardableResult
-    public func onLongPress(_ onLongPressClosure: @escaping OnLongPressRecognizedClosure) -> OnLongPressListener {
+    public func onLongPress(_ onLongPressClosure: @escaping OnGesture.OnLongPressRecognizedClosure) -> OnGesture.OnLongPressListener {
         self.isUserInteractionEnabled = true
-        let longPressGestureRecognizer = OnLongPressListener(target: self, action: #selector(longPressRecognized(_:)), closure: onLongPressClosure)
+        let longPressGestureRecognizer = OnGesture.OnLongPressListener(target: self, action: #selector(longPressRecognized(_:)), closure: onLongPressClosure)
         
         longPressGestureRecognizer.cancelsTouchesInView = false // Solves bug: https://stackoverflow.com/questions/18159147/iphone-didselectrowatindexpath-only-being-called-after-long-press-on-custom-c
         longPressGestureRecognizer.delegate = longPressGestureRecognizer
@@ -168,77 +164,9 @@ extension UIView {
     }
     
     @objc func longPressRecognized(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        guard let longPressGestureRecognizer = longPressGestureRecognizer as? OnLongPressListener else { return }
+        guard let onLongPressListener = longPressGestureRecognizer as? OnGesture.OnLongPressListener else { return }
         
-        longPressGestureRecognizer.closure(longPressGestureRecognizer)
+        onLongPressListener.closure(onLongPressListener)
     }
 
-}
-
-public typealias OnTapRecognizedClosure = (_ tapGestureRecognizer: UITapGestureRecognizer) -> ()
-public class OnClickListener: UITapGestureRecognizer, UIGestureRecognizerDelegate {
-    private(set) var closure: OnTapRecognizedClosure
-
-    init(target: Any?, action: Selector?, closure: @escaping OnTapRecognizedClosure) {
-        self.closure = closure
-        super.init(target: target, action: action)
-    }
-    
-    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-
-}
-
-public typealias OnLongPressRecognizedClosure = (_ longPressGestureRecognizer: UILongPressGestureRecognizer) -> ()
-public class OnLongPressListener: UILongPressGestureRecognizer, UIGestureRecognizerDelegate {
-    private(set) var closure: OnLongPressRecognizedClosure
-
-    init(target: Any?, action: Selector?, closure: @escaping OnLongPressRecognizedClosure) {
-        self.closure = closure
-        super.init(target: target, action: action)
-    }
-
-    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-}
-
-public typealias OnPanRecognizedClosure = (_ panGestureRecognizer: UIPanGestureRecognizer) -> ()
-public class OnPanListener: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
-    private(set) var closure: OnPanRecognizedClosure
-    var startPoint: CGPoint?
-    var relativeStartPoint: CGPoint?
-    var offsetPoint: CGPoint?
-    var _pannedPoint: CGPoint?
-    public var pannedPoint: CGPoint? {
-        return _pannedPoint
-    }
-    
-    init(target: Any?, action: Selector?, closure: @escaping OnPanRecognizedClosure) {
-        self.closure = closure
-        super.init(target: target, action: action)
-    }
-    
-    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-    
-    //    deinit {
-    //        📘("\(className(OnSwipeListener.self)) gone from RAM 💀")
-    //    }
-}
-
-public typealias OnSwipeRecognizedClosure = (_ swipeGestureRecognizer: UISwipeGestureRecognizer) -> ()
-public class OnSwipeListener: UISwipeGestureRecognizer, UIGestureRecognizerDelegate {
-    private(set) var closure: OnSwipeRecognizedClosure
-    
-    init(target: Any?, action: Selector?, closure: @escaping OnSwipeRecognizedClosure) {
-        self.closure = closure
-        super.init(target: target, action: action)
-    }
-    
-    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
 }
