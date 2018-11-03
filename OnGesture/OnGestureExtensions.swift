@@ -60,8 +60,8 @@ extension UIView {
      */
     @discardableResult
     public func onDrag(predicateClosure: OnGesture.PredicateClosure<UIView>? = nil, onDragClosure: @escaping OnGesture.CallbackClosure<OnGesture.OnPanListener>) -> OnGesture.OnPanListener {
-        return onPan { panGestureRecognizer in
-            guard let draggedView = panGestureRecognizer.view, (predicateClosure?(self) ?? true), let onPanListener = panGestureRecognizer as? OnGesture.OnPanListener else { return }
+        return onPan { onPanListener in
+            guard let draggedView = onPanListener.view, (predicateClosure?(self) ?? true) else { return }
             
             if let pannedPoint = onPanListener.pannedPoint {
                 draggedView.center = pannedPoint
