@@ -92,16 +92,13 @@ someLabel.onDrag(predicateClosure: { _ in
 ```
 
 ### CocoaPods
-To install this pod simply use: ```pod 'OnGestureSwift'```
+To install [this pod](https://cocoapods.org/pods/OnGestureSwift) simply use: ```pod 'OnGestureSwift'```
 
 ## Important Notes
 ### Memory Management
 Don't worry about memory leaks, this implementation has been tested, reviewed, used and improved - **it works perfectly with ARC**. I did try using `objc_setAssociatedObject` in the past but I saw it caused memory leaks so it's not recommended. The selected solution has no memory issues, so keep calm and free your mind. :)
 
 Just make sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references to ```self``` (you usually would like **not** to hold a strong reference inside a closure).
-
-## //TODO
-- I plan to move the global [typealias CallbackClosure](https://github.com/PerrchicK/OnGestureSwift/blob/master/OnGesture/OnGestureExtensions.swift#L13) and its "friend" into a namespace so it won't conflict with other developers' tools.
 
 Enjoy :)
 [Perry](http://linkedin.com/in/perrysh)
