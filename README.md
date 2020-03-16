@@ -92,7 +92,17 @@ someLabel.onDrag(predicateClosure: { _ in
 ```
 
 ### CocoaPods
-To install [this pod](https://cocoapods.org/pods/OnGestureSwift) simply use: ```pod 'OnGestureSwift'```
+[![](https://img.shields.io/cocoapods/v/OnGestureSwift.svg?style=flat)](https://cocoapods.org/pods/OnGestureSwift)
+
+To install [this pod](https://cocoapods.org/pods/OnGestureSwift) simply add `pod 'OnGestureSwift'` to your Podfile like this example:
+```
+target 'MyApp' do
+  pod 'OnGestureSwift'
+end
+```
+Then run a `pod install` inside your terminal, or from CocoaPods.app.
+
+
 
 ## Important Notes
 ### Memory Management
@@ -101,4 +111,5 @@ Don't worry about memory leaks, this implementation has been tested, reviewed, u
 Just make sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references to ```self``` (you usually would like **not** to hold a strong reference inside a closure).
 
 Enjoy :)
+
 [Perry](http://linkedin.com/in/perrysh)
