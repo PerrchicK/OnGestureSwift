@@ -108,7 +108,7 @@ Then run a `pod install` inside your terminal, or from CocoaPods.app.
 ### Memory Management
 Don't worry about memory leaks, this implementation has been tested, reviewed, used and improved - **it works perfectly with ARC**. I did try using `objc_setAssociatedObject` in the past but I saw it caused memory leaks so it's not recommended. The selected solution has no memory issues, so keep calm and free your mind. :)
 
-Just make sure you pass [weak self] / [unowned self] in case you don't won't to keep a strong references to ```self``` (you usually would like **not** to hold a strong reference inside a closure).
+Just make sure you use [weak self] / [unowned self] because **you don't want** to keep a strong references to ```self``` (basically, usually we would like **not** to hold strong references to ```self``` inside closures).
 
 Enjoy :)
 
